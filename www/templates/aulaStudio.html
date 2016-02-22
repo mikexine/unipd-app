@@ -1,0 +1,20 @@
+<ion-view title="Aula Studio">
+    <ion-content overflow-scroll="true" padding="true">
+    <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()"></ion-refresher>
+    <p id="updateholder" ng-show="!refreshed">Scroll down to refresh!</p>
+        
+	<div ng-repeat="(name, aula) in aule">
+        		<div class="card">
+            		<div class="item item-text-wrap">
+
+                    <h2><strong>{{aula.nome | uppercase}}</strong>
+
+            		<p>L'aula si trova in {{aula.indirizzo}} e ha {{ aula.posti }} posti. Orari: {{aula.orario}}.</p>
+                    <span data={{aula}} ng-click="gotoMap(aula)"><button class="button button-small button-full button-stable icon ion-map"> Go!</button></span>
+            		</div>
+            	</div>
+            </div>
+
+
+    </ion-content>
+</ion-view>

@@ -1,0 +1,20 @@
+<ion-view title="Biblioteca">
+    <ion-content overflow-scroll="true" padding="true">
+
+<ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()"></ion-refresher>
+    <p id="updateholder" ng-show="!refreshed">Scroll down to refresh!</p>
+        
+	<div ng-repeat="(name, biblio) in biblioteche">
+        		<div class="card">
+            		<div class="item item-text-wrap">
+
+					<h2><strong>{{biblio.nome | uppercase}}</strong></h2>
+
+            		<p>L'aula si trova in {{biblio.indirizzo}}. Orari: {{biblio.orario}}.</p>
+                    <span data={{biblio}} ng-click="gotoMap(biblio)"><button class="button button-small button-full button-stable icon ion-map"> Go!</button></span>
+            		</div>
+            	</div>
+            </div>
+
+    </ion-content>
+</ion-view>

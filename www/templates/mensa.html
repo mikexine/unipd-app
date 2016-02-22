@@ -1,0 +1,71 @@
+<ion-view title="Mensa" >
+	<ion-content overflow-scroll="true" padding="true">
+		<ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()"></ion-refresher>
+			<p id="updateholder" ng-show="!refreshed">Scroll down to refresh!</p>
+
+			<div ng-repeat="(name, mensa) in mense">
+        		<div class="card">
+            		<div class="item item-text-wrap">
+            		<h2><strong>{{mensa.nome | uppercase}}</strong></h2>
+
+            		<p>Orari: {{mensa.orari}}, a pranzo è <span ng-if="mensa.calendario.pranzo === 0">chiusa</span> <span ng-if="mensa.calendario.pranzo === 1"><strong>aperta</strong></span> e a cena è <span ng-if="mensa.calendario.cena === 1"><strong>aperta</strong></span> <span ng-if="mensa.calendario.cena === 0">chiusa</span>.</p>
+
+
+                <div ng-switch="mensa.menu.primo[0]">
+                    <div ng-switch-when="Menu non pubblicato su www.esupd.gov.it/">
+                        <p>Il menù non è presente sul sito dell'esu.</p>
+                    </div>
+                    <div ng-switch-default>
+                        <h3><strong>Menù</strong></h3>
+                <ul>
+                  <li> Primo: 
+                    <ul>
+                    <div ng-repeat="piatto in mensa.menu.primo">
+                    <li>- {{piatto}}</li>
+                    </div>
+                    </ul>
+                  </li>
+                </ul>
+
+                <ul>
+                  <li> Secondo: 
+                    <ul>
+                    <div ng-repeat="piatto in mensa.menu.secondo">
+                    <li>- {{piatto}}</li>
+                    </div>
+                    </ul>
+                  </li>
+                </ul>
+
+                <ul>
+                  <li> Contorno: 
+                    <ul>
+                    <div ng-repeat="piatto in mensa.menu.contorno">
+                    <li>- {{piatto}}</li>
+                    </div>
+                    </ul>
+                  </li>
+                </ul>
+
+                <ul>
+                  <li> Dessert: 
+                    <ul>
+                    <div ng-repeat="piatto in mensa.menu.dessert">
+                    <li>- {{piatto}}</li>
+                    </div>
+                    </ul>
+                  </li>
+                </ul>
+
+                    </div>
+                </div>          
+                <p>Ultimo aggiornamento: {{ last_update }}</p>
+            		<p>La mensa si trova in {{mensa.indirizzo}}.</p>
+
+                    <span data={{mensa}} ng-click="gotoMap(mensa)"><button class="button button-small button-full button-stable icon ion-map"> Go!</button></span>
+
+            		</div>
+            	</div>
+            </div>
+	</ion-content>
+</ion-view>
