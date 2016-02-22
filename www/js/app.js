@@ -11,6 +11,11 @@ var myapp = angular.module('app', ['ionic','ionic.service.core',  'ionic.service
   $ionicPlatform.ready(function() {
     $ionicAnalytics.register();
 
+    $ionicAnalytics.setGlobalProperties({
+      app_version_number: 'v0.0.3',
+      day_of_week: (new Date()).getDay()
+    });
+
     if (window.localStorage && !window.localStorage.getItem('firstRunFinished'))  {
       $state.go('logIn');
        window.localStorage.setItem('firstRunFinished',true);

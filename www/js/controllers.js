@@ -1,10 +1,15 @@
 var apiurl = "http://188.166.145.27/api/unipd";
+var currentPlatform = ionic.Platform.platform();
+var currentPlatformVersion = ionic.Platform.version();
 
 angular.module('app.controllers', [])
 
-.controller('mensaCtrl', function($scope, $http) {
+.controller('mensaCtrl', function($scope, $http, $ionicAnalytics) {
     $scope.doRefresh = function() {
-        myuni = window.localStorage['university'];
+        $ionicAnalytics.track('Refresh Mensa', {
+            platform: currentPlatform,
+            version: currentPlatformVersion
+        });
         $http.get(apiurl + "/mensa/")
             .success(function(newItems) {
                 console.log(newItems);
@@ -24,11 +29,20 @@ angular.module('app.controllers', [])
     $scope.$on('$ionicView.loaded', function() {
         $scope.mense = JSON.parse(window.localStorage['mensa'] || '{}');
         $scope.last_update = window.localStorage['last_update_mensa'];
+        $ionicAnalytics.track('Loaded view mensa', {
+            platform: currentPlatform,
+            version: currentPlatformVersion
+        });
     });
 
     $scope.gotoMap= function(mensa) {
         var lat = mensa['coord']['lat'];
         var lon = mensa['coord']['lon'];
+        $ionicAnalytics.track('Go to Mensa', {
+            mensa: mensa['nome'],
+            platform: currentPlatform,
+            version: currentPlatformVersion
+          });
         if (ionic.Platform.isIOS()) {
     window.open("http://maps.apple.com/?ll="+lat+","+lon+"&q="+mensa['nome'], '_system', 'location=yes')  
   } else {
@@ -38,9 +52,12 @@ angular.module('app.controllers', [])
 
 })
 
-.controller('aulaStudioCtrl', function($scope, $http) {
+.controller('aulaStudioCtrl', function($scope, $http, $ionicAnalytics) {
     $scope.doRefresh = function() {
-        myuni = window.localStorage['university'];
+        $ionicAnalytics.track('Refresh Aula Studio', {
+            platform: currentPlatform,
+            version: currentPlatformVersion
+        });
         $http.get(apiurl + "/aulastudio/")
             .success(function(newItems) {
                 console.log(newItems);
@@ -56,11 +73,20 @@ angular.module('app.controllers', [])
     };
     $scope.$on('$ionicView.loaded', function() {
         $scope.aule = JSON.parse(window.localStorage['aulastudio'] || '{}');
+        $ionicAnalytics.track('Loaded view aulastudio', {
+            platform: currentPlatform,
+            version: currentPlatformVersion
+        });
     });
 
         $scope.gotoMap= function(aula) {
         var lat = aula['coord']['lat'];
         var lon = aula['coord']['lon'];
+        $ionicAnalytics.track('Go to Aula Studio', {
+            aulastudio: aula['nome'],
+            platform: currentPlatform,
+            version: currentPlatformVersion
+          });
         if (ionic.Platform.isIOS()) {
     window.open("http://maps.apple.com/?ll="+lat+","+lon+"&q="+aula['nome'], '_system', 'location=yes')  
   } else {
@@ -70,9 +96,12 @@ angular.module('app.controllers', [])
 
 })
 
-.controller('bibliotecaCtrl', function($scope, $http) {
+.controller('bibliotecaCtrl', function($scope, $http, $ionicAnalytics) {
     $scope.doRefresh = function() {
-        myuni = window.localStorage['university'];
+        $ionicAnalytics.track('Refresh Biblioteca', {
+            platform: currentPlatform,
+            version: currentPlatformVersion
+        });
         $http.get(apiurl + "/biblioteca/")
             .success(function(newItems) {
                 console.log(newItems);
@@ -88,11 +117,20 @@ angular.module('app.controllers', [])
     };
     $scope.$on('$ionicView.loaded', function() {
         $scope.biblioteche = JSON.parse(window.localStorage['biblioteca'] || '{}');
+        $ionicAnalytics.track('Loaded view biblioteca', {
+            platform: currentPlatform,
+            version: currentPlatformVersion
+        });
     });
 
         $scope.gotoMap= function(biblio) {
         var lat = biblio['coord']['lat'];
         var lon = biblio['coord']['lon'];
+        $ionicAnalytics.track('Go to Biblioteca', {
+            biblioteca: biblio['nome'],
+            platform: currentPlatform,
+            version: currentPlatformVersion
+          });
         if (ionic.Platform.isIOS()) {
     window.open("http://maps.apple.com/?ll="+lat+","+lon+"&q="+biblio['nome'], '_system', 'location=yes')  
   } else {
@@ -105,8 +143,12 @@ angular.module('app.controllers', [])
 
 })
 
-.controller('logInCtrl', function($scope, $http, $state, $timeout) {
+.controller('logInCtrl', function($scope, $http, $state, $timeout, $ionicAnalytics) {
     $scope.init = function() {
+        $ionicAnalytics.track('First run', {
+            platform: currentPlatform,
+            version: currentPlatformVersion
+        });
 
         console.log('test');
         $http.get(apiurl + "/mensa/")
