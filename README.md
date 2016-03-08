@@ -1,3 +1,3 @@
-Simple Ionic app, under development.
+App for students of University of Padua. 
 
-Feedback or suggestion? I'll be happy to listen!
+Data source: http://unidata.xyz 
