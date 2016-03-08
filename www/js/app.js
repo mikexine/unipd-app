@@ -12,8 +12,10 @@ var myapp = angular.module('app', ['ionic','ionic.service.core',  'ionic.service
     $ionicAnalytics.register();
 
     $ionicAnalytics.setGlobalProperties({
-      app_version_number: 'v0.0.3',
-      day_of_week: (new Date()).getDay()
+      app_version_number: 'v0.0.1',
+      day_of_week: (new Date()).getDay(),
+      platform: ionic.Platform.platform(),
+      version: ionic.Platform.version()
     });
 
     if (window.localStorage && !window.localStorage.getItem('firstRunFinished'))  {
